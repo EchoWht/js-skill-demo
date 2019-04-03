@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="testAjaxGet()">ajax get</button>
+<button onclick="testAjaxPost()">ajax post</button>
+<button onclick="testAjaxGetJsonp()">Ajax Get Jsonp</button>
+<div id="result"></div>
+<script src="../jquery.min.js"></script>
+<script>
+    function testAjaxGet(){
+        $.ajax({
+            url : "./data.json",
+            type : 'get',
+            data : {
+                //这里是需要传的参数
+            },
+            cache : false,
+            success : function(data) {
+               console.log(data)
+                $("#result").html(
+                        data[0].name
+                )
+            }
+        });
+    }
+    function testAjaxPost(){
+        $.ajax({
+            url : "./data.json",
+            type : 'post',
+            data : {
+                //这里是需要传的参数
+            },
+            cache : false,
+            success : function(data) {
+                console.log(data)
+                $("#result").html(
+                    data[1].name
+                )
+            }
+        });
+    }
+    function testAjaxGetJsonp(){
+        $.ajax({
+            url : "./test.jsonp",
+            type : 'get',
+            jsonp:"callBackFunc",//定义jsonp的回调函数，服务端必须也需要用到这个名字
+            cache : false,
+            dataType: "jsonp",
+            success : function(data) {
+                console.log(data)
+            }
+        });
+    }
+    function callBackFunc(data) {
+        console.log(data)
+        $("#result").html(
+            data[0].name+data[1].name
+        )
+    }
+</script>
+</body>
+</html>
