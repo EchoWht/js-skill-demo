@@ -1,3 +1,4 @@
+//读取本地文件data.json,并修改data.json中的数据
 const fs = require("fs");
 const file_path = "./data.json";
 fs.readFile(file_path,function(err,data){
